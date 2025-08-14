@@ -12,14 +12,8 @@ class RetoReal extends RetoSolucionable
         $this->entidad_colaboradora = $entidad_colaboradora;
     }
 
-    public function getEntidadColaboradora(): ?string
-    {
-        return $this->entidad_colaboradora;
-    }
+    public function getEntidadColaboradora(): ?string{return $this->entidad_colaboradora;}
 
-    public function setEntidadColaboradora(string $entidad_colaboradora): void
-    {
-        $this->entidad_colaboradora = $entidad_colaboradora;
-    }
+    public function setEntidadColaboradora(string $entidad_colaboradora): void{$this->entidad_colaboradora = $entidad_colaboradora;}
 
 }

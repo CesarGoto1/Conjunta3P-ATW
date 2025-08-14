@@ -13,25 +13,13 @@ abstract class RetoSolucionable
         $this->descripcion = $descripcion;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    public function getId(): ?int{return $this->id;}
 
-    public function getDescripcion(): ?string
-    {
-        return $this->descripcion;
-    }
+    public function getDescripcion(): ?string{return $this->descripcion;}
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
+    public function setId(int $id): void{$this->id = $id;}
 
-    public function setDescripcion(string $descripcion): void
-    {
-        $this->descripcion = $descripcion;
-    }
+    public function setDescripcion(string $descripcion): void    {$this->descripcion = $descripcion;}
 
 
 }

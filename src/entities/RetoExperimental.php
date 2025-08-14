@@ -13,13 +13,7 @@ class RetoExperimental extends RetoSolucionable
 		$this->enfoque_pedagogico = $enfoque_pedagogico;
 	}
 
-	public function getEnfoquePedagogico(): ?string
-	{
-		return $this->enfoque_pedagogico;
-	}
+	public function getEnfoquePedagogico(): ?string{return $this->enfoque_pedagogico;}
 
-	public function setEnfoquePedagogico(string $enfoque_pedagogico): void
-	{
-		$this->enfoque_pedagogico = $enfoque_pedagogico;
-	}
+	public function setEnfoquePedagogico(string $enfoque_pedagogico): void{$this->enfoque_pedagogico = $enfoque_pedagogico;}
 }
