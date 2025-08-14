@@ -12,6 +12,23 @@ const createMentorTecnicoPanel = () => {
         ]
     });
 
+    // Store para equipos
+    const equipoNombreStore = Ext.create('Ext.data.Store', {
+        fields: ['id', 'nombre'],
+        proxy: {
+            type: 'rest',
+            url: 'api/equipo.php',
+            reader: {type: 'json', rootProperty: ''}
+        },
+        autoLoad: true
+    });
+
+    // Función para obtener el nombre del equipo por id
+    function getEquipoNombreById(id) {
+        const rec = equipoNombreStore.findRecord('id', id, 0, false, true, true);
+        return rec ? rec.get('nombre') : '';
+    }
+
     let mentorTecnicoStore = Ext.create('Ext.data.Store', {
         storeId: 'mentorTecnicoStore',
         model: 'App.model.MentorTecnico',
@@ -31,13 +48,6 @@ const createMentorTecnicoPanel = () => {
         itemId: 'mentorTecnicoPanel',
         layout: 'fit',
         columns: [
-            {
-                text: 'ID',
-                width: 50,
-                sortable: false,
-                hideable: false,
-                dataIndex: 'id'
-            },
             {
                 text: 'Nombre',
                 flex: 1,
@@ -74,16 +84,16 @@ const createMentorTecnicoPanel = () => {
                 dataIndex: 'disponibilidad_horaria'
             },
             {
-                text: 'Equipo ID',
+                text: 'Equipo',
                 flex: 1,
                 sortable: false,
                 hideable: false,
-                dataIndex: 'equipo_id'
+                dataIndex: 'equipo_id',
+                renderer: getEquipoNombreById
             }
         ]
     });
 
     return grid;
 };
-
 window.createMentorTecnicoPanel = createMentorTecnicoPanel;

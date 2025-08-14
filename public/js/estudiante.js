@@ -12,6 +12,23 @@ const createEstudiantePanel = () => {
         ]
     });
 
+    // Store para equipos
+    const equipoNombreStore = Ext.create('Ext.data.Store', {
+        fields: ['id', 'nombre'],
+        proxy: {
+            type: 'rest',
+            url: 'api/equipo.php',
+            reader: {type: 'json', rootProperty: ''}
+        },
+        autoLoad: true
+    });
+
+    // Función para obtener el nombre del equipo por id
+    function getEquipoNombreById(id) {
+        const rec = equipoNombreStore.findRecord('id', id, 0, false, true, true);
+        return rec ? rec.get('nombre') : '';
+    }
+
     let estudianteStore = Ext.create('Ext.data.Store', {
         storeId: 'estudianteStore',
         model: 'App.model.Estudiante',
@@ -31,13 +48,6 @@ const createEstudiantePanel = () => {
         itemId: 'estudiantePanel',
         layout: 'fit',
         columns: [
-            {
-                text: 'ID',
-                width: 50,
-                sortable: false,
-                hideable: false,
-                dataIndex: 'id'
-            },
             {
                 text: 'Nombre',
                 flex: 1,
@@ -74,11 +84,12 @@ const createEstudiantePanel = () => {
                 dataIndex: 'tiempo_disponible_semanal'
             },
             {
-                text: 'Equipo ID',
+                text: 'Equipo',
                 flex: 1,
                 sortable: false,
                 hideable: false,
-                dataIndex: 'equipo_id'
+                dataIndex: 'equipo_id',
+                renderer: getEquipoNombreById
             }
         ]
     });
