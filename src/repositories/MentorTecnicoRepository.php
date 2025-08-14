@@ -3,37 +3,37 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Config\Database;
-use App\Entities\Estudiante;
+use App\Entities\MentorTecnico;
 use App\Interfaces\RepositoryInterface;
 use PDO;
 
-class EstudianteRepository implements RepositoryInterface
+class MentorTecnicoRepository implements RepositoryInterface
 {
     private PDO $db;
     public function __construct(){
         $this->db = Database::getConnection();
     }
 
-    // CREATE ESTUDIANTE
+    // CREATE MENTOR TECNICO
     public function create(object $entity): bool {
-        if(!$entity instanceof Estudiante){
-            throw new \InvalidArgumentException('Estudiante Expected');
+        if(!$entity instanceof MentorTecnico){
+            throw new \InvalidArgumentException('MentorTecnico Expected');
         }
 
-        $stmt = $this->db->prepare("CALL sp_create_estudiante(
+        $stmt = $this->db->prepare("CALL sp_create_mentor_tecnico(
             :nombre,
             :email,
-            :grado,
-            :institucion,
-            :tiempo_disponible_semanal
+            :especialidad,
+            :experiencia,
+            :disponibilidad_horaria
         )");
 
         $ok = $stmt->execute([
             ':nombre' => $entity->getNombre(),
             ':email' => $entity->getEmail(),
-            ':grado' => $entity->getGrado(),
-            ':institucion' => $entity->getInstitucion(),
-            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal()
+            ':especialidad' => $entity->getEspecialidad(),
+            ':experiencia' => $entity->getExperiencia(),
+            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria()
         ]);
 
         if($ok){
@@ -45,35 +45,35 @@ class EstudianteRepository implements RepositoryInterface
 
     // FIND BY ID
     public function findById(int $id): ?object {
-        $stmt = $this->db->prepare("CALL sp_estudiante_find_id(:id);");
+        $stmt = $this->db->prepare("CALL sp_mentor_tecnico_find_id(:id);");
         $stmt->execute([':id' => $id]);
         $row = $stmt->fetch();
         $stmt->closeCursor();
         return $row ? $this->hydrate($row) : null;
     }
 
-    // UPDATE ESTUDIANTE
+    // UPDATE MENTOR TECNICO
     public function update(object $entity): bool {
-        if(!$entity instanceof Estudiante){
-            throw new \InvalidArgumentException('Estudiante Expected');
+        if(!$entity instanceof MentorTecnico){
+            throw new \InvalidArgumentException('MentorTecnico Expected');
         }
 
-        $stmt = $this->db->prepare("CALL sp_update_estudiante(
+        $stmt = $this->db->prepare("CALL sp_update_mentor_tecnico(
             :id,
             :nombre,
             :email,
-            :grado,
-            :institucion,
-            :tiempo_disponible_semanal
+            :especialidad,
+            :experiencia,
+            :disponibilidad_horaria
         )");
 
         $ok = $stmt->execute([
             ':id' => $entity->getId(),
             ':nombre' => $entity->getNombre(),
             ':email' => $entity->getEmail(),
-            ':grado' => $entity->getGrado(),
-            ':institucion' => $entity->getInstitucion(),
-            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal()
+            ':especialidad' => $entity->getEspecialidad(),
+            ':experiencia' => $entity->getExperiencia(),
+            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria()
         ]);
 
         if($ok){
@@ -83,9 +83,9 @@ class EstudianteRepository implements RepositoryInterface
         return $ok;
     }
 
-    // DELETE ESTUDIANTE
+    // DELETE MENTOR TECNICO
     public function delete(int $id): bool {
-        $stmt = $this->db->prepare("CALL sp_delete_estudiante(:id);");
+        $stmt = $this->db->prepare("CALL sp_delete_mentor_tecnico(:id);");
         $ok = $stmt->execute([':id' => $id]);
         if($ok){
             $stmt->fetch();
@@ -96,7 +96,7 @@ class EstudianteRepository implements RepositoryInterface
 
     // FIND ALL
     public function findAll(): array {
-        $stmt = $this->db->query("CALL sp_estudiante_list();");
+        $stmt = $this->db->query("CALL sp_mentor_tecnico_list();");
         $rows = $stmt->fetchAll();
         $stmt->closeCursor();
 
@@ -107,14 +107,14 @@ class EstudianteRepository implements RepositoryInterface
         return $out;
     }
 
-    private function hydrate(array $row): Estudiante {
-        return new Estudiante(
+    private function hydrate(array $row): MentorTecnico {
+        return new MentorTecnico(
             (int)$row['id'],
             $row['nombre'],
             $row['email'],
-            $row['grado'],
-            $row['institucion'],
-            (int)$row['tiempo_disponible_semanal']
+            $row['especialidad'],
+            (int)$row['experiencia'],
+            (int)$row['disponibilidad_horaria']
         );
     }
 }

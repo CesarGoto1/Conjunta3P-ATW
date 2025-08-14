@@ -12,13 +12,12 @@ class Estudiante extends Participante
     public function __construct(
         ?int $id,
         string $nombre,
-        string $tipo_participante,
         string $email,
         string $grado,
         string $institucion,
         int $tiempo_disponible_semanal
     ) {
-        parent::__construct($id, $nombre, $tipo_participante, $email);
+        parent::__construct($id, $nombre, $email);
         $this->grado = $grado;
         $this->institucion = $institucion;
         $this->tiempo_disponible_semanal = $tiempo_disponible_semanal;
