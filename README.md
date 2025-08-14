@@ -1,3 +1,6 @@
+# AUTORES
+César González
+David Tenguzñay
 # Uso de la API EquipoReto con Postman
 
 Esta guía te muestra cómo realizar operaciones **Crear (POST)**, **Actualizar (PUT)** y **Eliminar (DELETE)** sobre la relación Equipo-Reto (`Equipo_RetoSoluccionable`) usando Postman.
