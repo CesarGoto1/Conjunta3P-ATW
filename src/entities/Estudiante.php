@@ -15,9 +15,10 @@ class Estudiante extends Participante
         string $email,
         string $grado,
         string $institucion,
-        int $tiempo_disponible_semanal
+        int $tiempo_disponible_semanal,
+        ?int $equipo_id = null
     ) {
-        parent::__construct($id, $nombre, $email);
+        parent::__construct($id, $nombre, $email, $equipo_id);
         $this->grado = $grado;
         $this->institucion = $institucion;
         $this->tiempo_disponible_semanal = $tiempo_disponible_semanal;

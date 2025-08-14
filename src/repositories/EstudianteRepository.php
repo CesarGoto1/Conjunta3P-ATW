@@ -25,7 +25,8 @@ class EstudianteRepository implements RepositoryInterface
             :email,
             :grado,
             :institucion,
-            :tiempo_disponible_semanal
+            :tiempo_disponible_semanal,
+            :equipo_id
         )");
 
         $ok = $stmt->execute([
@@ -33,7 +34,8 @@ class EstudianteRepository implements RepositoryInterface
             ':email' => $entity->getEmail(),
             ':grado' => $entity->getGrado(),
             ':institucion' => $entity->getInstitucion(),
-            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal()
+            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal(),
+            ':equipo_id' => $entity->getEquipoId()
         ]);
 
         if($ok){
@@ -64,7 +66,8 @@ class EstudianteRepository implements RepositoryInterface
             :email,
             :grado,
             :institucion,
-            :tiempo_disponible_semanal
+            :tiempo_disponible_semanal,
+            :equipo_id
         )");
 
         $ok = $stmt->execute([
@@ -73,7 +76,8 @@ class EstudianteRepository implements RepositoryInterface
             ':email' => $entity->getEmail(),
             ':grado' => $entity->getGrado(),
             ':institucion' => $entity->getInstitucion(),
-            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal()
+            ':tiempo_disponible_semanal' => $entity->getTiempoDisponibleSemanal(),
+            ':equipo_id' => $entity->getEquipoId()
         ]);
 
         if($ok){
@@ -114,7 +118,8 @@ class EstudianteRepository implements RepositoryInterface
             $row['email'],
             $row['grado'],
             $row['institucion'],
-            (int)$row['tiempo_disponible_semanal']
+            (int)$row['tiempo_disponible_semanal'],
+            isset($row['equipo_id']) ? (int)$row['equipo_id'] : null
         );
     }
 }

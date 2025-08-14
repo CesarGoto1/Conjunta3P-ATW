@@ -20,7 +20,8 @@ class EstudianteController
             'email'                     => $estudiante->getEmail(),
             'grado'                     => $estudiante->getGrado(),
             'institucion'               => $estudiante->getInstitucion(),
-            'tiempo_disponible_semanal' => $estudiante->getTiempoDisponibleSemanal()
+            'tiempo_disponible_semanal' => $estudiante->getTiempoDisponibleSemanal(),
+            'equipo_id'                 => $estudiante->getEquipoId()
         ];
     }
 
@@ -47,7 +48,8 @@ class EstudianteController
                     $payload['email'],
                     $payload['grado'],
                     $payload['institucion'],
-                    (int)$payload['tiempo_disponible_semanal']
+                    (int)$payload['tiempo_disponible_semanal'],
+                    isset($payload['equipo_id']) ? (int)$payload['equipo_id'] : null
                 );
                 echo json_encode(['success' => $this->estudianteRepository->create($estudiante)]);
             } catch (\InvalidArgumentException $e) {
@@ -71,6 +73,7 @@ class EstudianteController
                 if(isset($payload['grado'])) $existing->setGrado($payload['grado']);
                 if(isset($payload['institucion'])) $existing->setInstitucion($payload['institucion']);
                 if(isset($payload['tiempo_disponible_semanal'])) $existing->setTiempoDisponibleSemanal((int)$payload['tiempo_disponible_semanal']);
+                if(array_key_exists('equipo_id', $payload)) $existing->setEquipoId($payload['equipo_id'] !== null ? (int)$payload['equipo_id'] : null);
 
                 echo json_encode(['success' => $this->estudianteRepository->update($existing)]);
             } catch (\InvalidArgumentException $e) {

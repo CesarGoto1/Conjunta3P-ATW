@@ -25,7 +25,8 @@ class MentorTecnicoRepository implements RepositoryInterface
             :email,
             :especialidad,
             :experiencia,
-            :disponibilidad_horaria
+            :disponibilidad_horaria,
+            :equipo_id
         )");
 
         $ok = $stmt->execute([
@@ -33,7 +34,8 @@ class MentorTecnicoRepository implements RepositoryInterface
             ':email' => $entity->getEmail(),
             ':especialidad' => $entity->getEspecialidad(),
             ':experiencia' => $entity->getExperiencia(),
-            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria()
+            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria(),
+            ':equipo_id' => $entity->getEquipoId()
         ]);
 
         if($ok){
@@ -64,7 +66,8 @@ class MentorTecnicoRepository implements RepositoryInterface
             :email,
             :especialidad,
             :experiencia,
-            :disponibilidad_horaria
+            :disponibilidad_horaria,
+            :equipo_id
         )");
 
         $ok = $stmt->execute([
@@ -73,7 +76,8 @@ class MentorTecnicoRepository implements RepositoryInterface
             ':email' => $entity->getEmail(),
             ':especialidad' => $entity->getEspecialidad(),
             ':experiencia' => $entity->getExperiencia(),
-            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria()
+            ':disponibilidad_horaria' => $entity->getDisponibilidadHoraria(),
+            ':equipo_id' => $entity->getEquipoId()
         ]);
 
         if($ok){
@@ -114,7 +118,8 @@ class MentorTecnicoRepository implements RepositoryInterface
             $row['email'],
             $row['especialidad'],
             (int)$row['experiencia'],
-            (int)$row['disponibilidad_horaria']
+            (int)$row['disponibilidad_horaria'],
+            isset($row['equipo_id']) ? (int)$row['equipo_id'] : null
         );
     }
 }

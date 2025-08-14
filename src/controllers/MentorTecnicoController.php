@@ -20,7 +20,8 @@ class MentorTecnicoController
             'email'                 => $mentor->getEmail(),
             'especialidad'          => $mentor->getEspecialidad(),
             'experiencia'           => $mentor->getExperiencia(),
-            'disponibilidad_horaria'=> $mentor->getDisponibilidadHoraria()
+            'disponibilidad_horaria'=> $mentor->getDisponibilidadHoraria(),
+            'equipo_id'             => $mentor->getEquipoId()
         ];
     }
 
@@ -47,7 +48,8 @@ class MentorTecnicoController
                     $payload['email'],
                     $payload['especialidad'],
                     (int)$payload['experiencia'],
-                    (int)$payload['disponibilidad_horaria']
+                    (int)$payload['disponibilidad_horaria'],
+                    isset($payload['equipo_id']) ? (int)$payload['equipo_id'] : null
                 );
                 echo json_encode(['success' => $this->mentorTecnicoRepository->create($mentor)]);
             } catch (\InvalidArgumentException $e) {
@@ -71,6 +73,7 @@ class MentorTecnicoController
                 if(isset($payload['especialidad'])) $existing->setEspecialidad($payload['especialidad']);
                 if(isset($payload['experiencia'])) $existing->setExperiencia((int)$payload['experiencia']);
                 if(isset($payload['disponibilidad_horaria'])) $existing->setDisponibilidadHoraria((int)$payload['disponibilidad_horaria']);
+                if(array_key_exists('equipo_id', $payload)) $existing->setEquipoId($payload['equipo_id'] !== null ? (int)$payload['equipo_id'] : null);
 
                 echo json_encode(['success' => $this->mentorTecnicoRepository->update($existing)]);
             } catch (\InvalidArgumentException $e) {
