@@ -44,7 +44,6 @@ class MentorTecnicoController
                 $mentor = new MentorTecnico(
                     null,
                     $payload['nombre'],
-                    '', // tipo_participante no se usa
                     $payload['email'],
                     $payload['especialidad'],
                     (int)$payload['experiencia'],

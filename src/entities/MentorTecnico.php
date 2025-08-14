@@ -12,13 +12,12 @@ class MentorTecnico extends Participante
     public function __construct(
         ?int $id,
         string $nombre,
-        string $tipo_participante,
         string $email,
         string $especialidad,
         int $experiencia,
         int $disponibilidad_horaria
     ) {
-        parent::__construct($id, $nombre, $tipo_participante, $email);
+        parent::__construct($id, $nombre, $email);
         $this->especialidad = $especialidad;
         $this->experiencia = $experiencia;
         $this->disponibilidad_horaria = $disponibilidad_horaria;

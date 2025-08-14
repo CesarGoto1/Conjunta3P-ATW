@@ -44,7 +44,6 @@ class EstudianteController
                 $estudiante = new Estudiante(
                     null,
                     $payload['nombre'],
-                    '', // tipo_participante no se usa
                     $payload['email'],
                     $payload['grado'],
                     $payload['institucion'],
